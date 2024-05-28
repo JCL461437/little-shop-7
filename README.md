@@ -1,5 +1,8 @@
 # Little Esty Shop
 
+## Database Schema
+<img width="1228" alt="DBSCHEMAETSY" src="https://github.com/JCL461437/little-shop-7/assets/74687494/d6b9d0f5-12e8-494f-a3e2-e51e54042d60">
+
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
