@@ -1,7 +1,7 @@
 # Little Esty Shop
 
 ## Database Schema
-<img width="1228" alt="DBSCHEMAETSY" src="https://github.com/JCL461437/little-shop-7/assets/74687494/d6b9d0f5-12e8-494f-a3e2-e51e54042d60">
+<img width="1314" alt="NEWDBSCHEMA" src="https://github.com/JCL461437/little-shop-7/assets/74687494/35d2668f-755b-48cf-941d-9e2a13117917">
 
 ## Background and Description
 
