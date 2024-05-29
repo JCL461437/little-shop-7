@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'welcome#index'
 
+  # get "/merchants/:id/dashboard", to: "merchant#show"
+resources :merchants, only: [:show]
 
 end
