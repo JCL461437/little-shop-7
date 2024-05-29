@@ -38,6 +38,11 @@ namespace :csv_load do
         generate_data_from_csv(Transaction, "./db/data/transactions.csv")
     end
 
+    desc "Load Test Data from Fixture CSV"
+    task test: :environment do
+        generate_data_from_csv(Customer, "./db/data/customers_fixture.csv")
+    end
+
     desc "Load All data from all CSVs"
     task all: :environment do
         Rake::Task["csv_load:customers"].invoke
@@ -46,5 +51,10 @@ namespace :csv_load do
         Rake::Task["csv_load:invoices"].invoke
         Rake::Task["csv_load:merchants"].invoke
         Rake::Task["csv_load:transactions"].invoke
+    end
+    
+    # Method to reset_pk_sequence after each CSV load
+    def reset_pk_sequence
+        # iterate through each table/model and reset the primary key sequence
     end
 end
