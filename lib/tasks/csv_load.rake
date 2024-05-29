@@ -4,6 +4,7 @@ def generate_data_from_csv(model, file_path)
     CSV.foreach(file_path, headers: true) do |row|
         model.create(row.to_h)
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
 end
 
 namespace :csv_load do
@@ -51,10 +52,5 @@ namespace :csv_load do
         Rake::Task["csv_load:invoices"].invoke
         Rake::Task["csv_load:merchants"].invoke
         Rake::Task["csv_load:transactions"].invoke
-    end
-    
-    # Method to reset_pk_sequence after each CSV load
-    def reset_pk_sequence
-        # iterate through each table/model and reset the primary key sequence
     end
 end
