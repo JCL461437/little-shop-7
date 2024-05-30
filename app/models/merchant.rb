@@ -11,7 +11,7 @@ class Merchant < ApplicationRecord
     Customer.joins(invoices: :transactions)
             .where('transactions.result = ?', 0)
             .group('customers.id')
-            .order('count(transactions.id) desc')
-            .limit(5)
+
+
   end
 end
