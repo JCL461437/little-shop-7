@@ -43,6 +43,26 @@ namespace :csv_load do
     task test: :environment do
         generate_data_from_csv(Customer, "./db/data/customers_fixture.csv")
     end
+    
+    desc "Load Test Data from Fixture CSV"
+    task iitest: :environment do
+        generate_data_from_csv(InvoiceItem, "./db/data/invoice_items_fixture.csv")
+    end
+
+    desc "Load Test Data from Fixture CSV"
+    task ittest: :environment do
+        generate_data_from_csv(Item, "./db/data/items_fixture.csv")
+    end
+
+    desc "Load Test Data from Fixture CSV"
+    task intest: :environment do
+        generate_data_from_csv(Invoice, "./db/data/invoice_fixture.csv")
+    end
+
+    desc "Load Test Data from Fixture CSV"
+    task trtest: :environment do
+        generate_data_from_csv(Transaction, "./db/data/transaction_fixture.csv")
+    end
 
     desc "Load All data from all CSVs"
     task all: :environment do
@@ -52,5 +72,15 @@ namespace :csv_load do
         Rake::Task["csv_load:invoices"].invoke
         Rake::Task["csv_load:merchants"].invoke
         Rake::Task["csv_load:transactions"].invoke
+    end
+
+    desc "Load All data from all CSVs Fixtures"
+    task all_fixtures: :environment do
+        Rake::Task["csv_load:test"].invoke
+        Rake::Task["csv_load:iitest"].invoke
+        Rake::Task["csv_load:ittest"].invoke
+        Rake::Task["csv_load:intest"].invoke
+        Rake::Task["csv_load:trtest"].invoke
+        Rake::Task["csv_load:merchants"].invoke
     end
 end
