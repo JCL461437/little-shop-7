@@ -55,9 +55,7 @@
                         <th scope="row"><%= index + 1 %></th>
                         <th scope="row"><%= customer.first_name %> <%= customer.last_name %></th>
                         <th scope="row">
-                            <% if customer.transaction.result = "success" %>
-                                <%= customer.transaction.count %>
-                            <% end %>
+                            
                         </th>
                     </tr>
                     <% end %>

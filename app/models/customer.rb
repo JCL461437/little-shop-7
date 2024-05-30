@@ -1,8 +1,5 @@
 class Customer < ApplicationRecord
   has_many :invoices
-  
-  
-  def 
-    
-  end
+  has_many :transactions, through: :invoices
+  has_many :merchants, through: :invoices
 end
