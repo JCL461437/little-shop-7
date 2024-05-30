@@ -77,10 +77,10 @@ namespace :csv_load do
     desc "Load All data from all CSVs Fixtures"
     task all_fixtures: :environment do
         Rake::Task["csv_load:test"].invoke
-        Rake::Task["csv_load:iitest"].invoke
-        Rake::Task["csv_load:ittest"].invoke
         Rake::Task["csv_load:intest"].invoke
         Rake::Task["csv_load:trtest"].invoke
         Rake::Task["csv_load:merchants"].invoke
+        Rake::Task["csv_load:ittest"].invoke
+        Rake::Task["csv_load:invoice_items"].invoke
     end
 end
