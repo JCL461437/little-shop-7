@@ -24,7 +24,7 @@ RSpec.describe "Merchant Dashboard Show Page" do
             visit merchant_dashboard_index_path(@merchant)
 
             within("#top_customers") do
-                expect(page).to have_content("Top Customers")
+                expect(page).to have_content("Favorite Customers")
                 expect(page).to have_content("Customer Name")
                 expect(page).to have_content("Number of Successful Transactions")
                 # add expects to check for top 5 customers
