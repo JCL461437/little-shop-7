@@ -54,9 +54,7 @@
                     <tr>
                         <th scope="row"><%= index + 1 %></th>
                         <th scope="row"><%= customer.first_name %> <%= customer.last_name %></th>
-                        <th scope="row">
-                            
-                        </th>
+                        <th scope="row"><%= @merchant.count_successful_transactions(customer) %></th>
                     </tr>
                     <% end %>
                 </tbody>
