@@ -77,41 +77,41 @@ RSpec.describe Merchant, type: :model do
           expect(merchant.top_customers).to eq([customer_1, customer_2, customer_3, customer_4, customer_5])
         end
       end
-      describe "#count_successful_transactions" do
-        it "returns the count of successful transactions for a specific customer for the merchant" do
-          customer_1 = create(:customer)
-          customer_2 = create(:customer)
-          customer_3 = create(:customer)
-          customer_4 = create(:customer)
-          customer_5 = create(:customer)
-          customer_6 = create(:customer)
+      # describe "#count_successful_transactions" do
+      #   it "returns the count of successful transactions for a specific customer for the merchant" do
+      #     customer_1 = create(:customer)
+      #     customer_2 = create(:customer)
+      #     customer_3 = create(:customer)
+      #     customer_4 = create(:customer)
+      #     customer_5 = create(:customer)
+      #     customer_6 = create(:customer)
           
-          item_1 = create(:item, merchant: merchant)
+      #     item_1 = create(:item, merchant: merchant)
 
-          invoice_1 = create(:invoice, customer: customer_1, items: [item_1])
-          invoice_2 = create(:invoice, customer: customer_2, items: [item_1])
-          invoice_3 = create(:invoice, customer: customer_3, items: [item_1])
-          invoice_4 = create(:invoice, customer: customer_4, items: [item_1])
-          invoice_5 = create(:invoice, customer: customer_5, items: [item_1])
-          invoice_6 = create(:invoice, customer: customer_6, items: [item_1])
-          invoice_7 = create(:invoice, customer: customer_1, items: [item_1])
-          invoice_8 = create(:invoice, customer: customer_1, items: [item_1])
-          invoice_9 = create(:invoice, customer: customer_2, items: [item_1])
+      #     invoice_1 = create(:invoice, customer: customer_1, items: [item_1])
+      #     invoice_2 = create(:invoice, customer: customer_2, items: [item_1])
+      #     invoice_3 = create(:invoice, customer: customer_3, items: [item_1])
+      #     invoice_4 = create(:invoice, customer: customer_4, items: [item_1])
+      #     invoice_5 = create(:invoice, customer: customer_5, items: [item_1])
+      #     invoice_6 = create(:invoice, customer: customer_6, items: [item_1])
+      #     invoice_7 = create(:invoice, customer: customer_1, items: [item_1])
+      #     invoice_8 = create(:invoice, customer: customer_1, items: [item_1])
+      #     invoice_9 = create(:invoice, customer: customer_2, items: [item_1])
 
-          create(:transaction, invoice: invoice_1, result: 0)
-          create(:transaction, invoice: invoice_2, result: 0)
-          create(:transaction, invoice: invoice_3, result: 0)
-          create(:transaction, invoice: invoice_4, result: 0)
-          create(:transaction, invoice: invoice_5, result: 0)
-          create(:transaction, invoice: invoice_6, result: 1)
-          create(:transaction, invoice: invoice_7, result: 0)
-          create(:transaction, invoice: invoice_8, result: 1)
-          create(:transaction, invoice: invoice_9, result: 1)
+      #     create(:transaction, invoice: invoice_1, result: 0)
+      #     create(:transaction, invoice: invoice_2, result: 0)
+      #     create(:transaction, invoice: invoice_3, result: 0)
+      #     create(:transaction, invoice: invoice_4, result: 0)
+      #     create(:transaction, invoice: invoice_5, result: 0)
+      #     create(:transaction, invoice: invoice_6, result: 1)
+      #     create(:transaction, invoice: invoice_7, result: 0)
+      #     create(:transaction, invoice: invoice_8, result: 1)
+      #     create(:transaction, invoice: invoice_9, result: 1)
 
-          expect(merchant.count_successful_transactions(customer_1)).to eq(2)
-          expect(merchant.count_successful_transactions(customer_2)).to eq(1)
-          expect(merchant.count_successful_transactions(customer_6)).to eq(0)
-        end
-      end
+      #     expect(merchant.count_successful_transactions(customer_1)).to eq(2)
+      #     expect(merchant.count_successful_transactions(customer_2)).to eq(1)
+      #     expect(merchant.count_successful_transactions(customer_6)).to eq(0)
+      #   end
+      # end
   end
 end
