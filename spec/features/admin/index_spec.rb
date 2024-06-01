@@ -44,9 +44,9 @@ RSpec.describe 'admin index' do
       transaction_7 = Transaction.create!(invoice_id: invoice_7.id, result: 0)
       transaction_8 = Transaction.create!(invoice_id: invoice_8.id, result: 0)
       transaction_9 = Transaction.create!(invoice_id: invoice_9.id, result: 1)
-      # binding.pry
+
       visit "/admin"
-      #look up orderly here for the test
+      
       expect(Customer.count).to eq(6)
       expect(page).to have_content("Top Customers")
       expect("A Man").to appear_before("B Man")
