@@ -1,6 +1,7 @@
 require 'csv'
 
 def generate_data_from_csv(model, file_path)
+    # model.destroy_all
     CSV.foreach(file_path, headers: true) do |row|
         model.create(row.to_h)
     end
@@ -72,6 +73,7 @@ namespace :csv_load do
         Rake::Task["csv_load:merchants"].invoke
         Rake::Task["csv_load:items"].invoke
         Rake::Task["csv_load:invoice_items"].invoke
+        puts "All data loaded"
     end
 
     desc "Load All data from all CSVs Fixtures"
@@ -82,5 +84,6 @@ namespace :csv_load do
         Rake::Task["csv_load:merchants"].invoke
         Rake::Task["csv_load:ittest"].invoke
         Rake::Task["csv_load:invoice_items"].invoke
+        puts "All data loaded"
     end
 end
