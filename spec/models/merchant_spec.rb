@@ -12,20 +12,33 @@ RSpec.describe Merchant, type: :model do
       let(:customer) { create(:customer) }
 
       describe "#items_ready_to_ship" do
-        it "returns items that are ready to ship" do
+        it "returns items that are ready to ship from oldest to newest" do
+          # item_1 = create(:item, merchant: merchant)
+          # item_2 = create(:item, merchant: merchant)
+          # item_3 = create(:item, merchant: merchant)
+
+          # invoice = create(:invoice, customer: customer, items: [item_1, item_2, item_3])
+
+          # invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice, status: 2)
+          # invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice, status: 2)
+          # invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice, status: 0)
+
+          # transaction = create(:transaction, invoice: invoice, result: 0)
           item_1 = create(:item, merchant: merchant)
           item_2 = create(:item, merchant: merchant)
           item_3 = create(:item, merchant: merchant)
 
-          invoice = create(:invoice, customer: customer, items: [item_1, item_2, item_3])
+          invoice_1 = create(:invoice, customer: customer, created_at: 2.days.ago)
+          invoice_2 = create(:invoice, customer: customer, created_at: 1.day.ago)
 
-          invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice, status: 2)
-          invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice, status: 2)
-          invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice, status: 0)
+          create(:invoice_item, item: item_1, invoice: invoice_1, status: 2)
+          create(:invoice_item, item: item_2, invoice: invoice_2, status: 2)
+          create(:invoice_item, item: item_3, invoice: invoice_1, status: 0)
 
-          transaction = create(:transaction, invoice: invoice, result: 0)
+          create(:transaction, invoice: invoice_1, result: 0)
+          create(:transaction, invoice: invoice_2, result: 0)
 
-          expect(merchant.items_ready_to_ship).to eq([item_1, item_2])
+          expect(merchant.items_ready_to_ship).to eq([item_2, item_1])
         end
       end
       describe "#top_customers" do

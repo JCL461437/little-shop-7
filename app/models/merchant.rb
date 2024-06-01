@@ -4,9 +4,10 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   
   def items_ready_to_ship
-    items.joins(:invoice_items)
+    items.joins(invoice_items: :invoice)
           .where('invoice_items.status = ?', 2)
-          .order('invoice_items.created_at asc')
+          .select('items.*, invoices.created_at')
+          .order('invoices.created_at asc')
           .distinct
   end
 
