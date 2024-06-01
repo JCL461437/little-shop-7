@@ -16,4 +16,10 @@ class Merchant < ApplicationRecord
             .order('count(transactions.id) desc')
             .limit(5)
   end
+
+  def count_successful_transactions(customer)
+    invoices.joins(:transactions)
+            .where(customer_id: customer.id, transactions: { result: 0 })
+            .count('transactions.id')
+  end
 end
