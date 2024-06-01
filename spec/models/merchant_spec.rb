@@ -38,7 +38,7 @@ RSpec.describe Merchant, type: :model do
           create(:transaction, invoice: invoice_1, result: 0)
           create(:transaction, invoice: invoice_2, result: 0)
 
-          expect(merchant.items_ready_to_ship).to eq([item_2, item_1])
+          expect(merchant.items_ready_to_ship).to eq([item_1, item_2])
         end
       end
       describe "#top_customers" do
