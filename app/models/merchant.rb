@@ -6,6 +6,7 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     items.joins(:invoice_items)
           .where('invoice_items.status = ?', 2)
+          .order('invoice_items.created_at asc')
           .distinct
   end
 
