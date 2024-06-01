@@ -3,3 +3,8 @@
 <%= link_to "Dashboard", "/admin" %>
 <%= link_to "Merchants", "/admin/merchants" %>
 <%= link_to "Invoices", "/admin/invoices" %>
+
+<h3>Top Customers</h3>
+<% @top_five_customers.each_with_index do |customer, index| %>
+  <p><%= "#{index + 1}. #{customer.full_name} - #{customer.count_of_purchases} purchases"  %></p>
+<% end %>
