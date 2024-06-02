@@ -7,9 +7,10 @@ RSpec.describe "admin merchants index" do
       merchants = FactoryBot.create_list(:merchant, 10)
 
       visit admin_merchants_path
-
+      
       merchants.each do |merchant|
         expect(page).to have_content(merchant.name)
+      end
     end
   end
 end
