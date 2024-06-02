@@ -95,9 +95,19 @@ RSpec.describe 'admin index' do
       end
 
       xit "and each invoice id links to that invoice's admin show page" do
+        customer_1 = Customer.create!
+        merchant_1 = Merchant.create!
+        invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
+        item_1 = Item.create!(merchant_id: merchant_1.id)
+        ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+
         visit "/admin"
-         # save_and_open_page
+         save_and_open_page
           # binding.pry
+        expect(page).to have_link("#{invoice_1.id}")
+        
+        click_link("#{invoice_1.id}")
+        expect(current_path).to eq(admin_invoice(invoice_1))
       end
 
     end
