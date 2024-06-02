@@ -16,7 +16,7 @@ RSpec.describe "Merchant Show Page" do
     describe "When I visit the merchant items index" do
       it "I see a list of only my items names" do
         visit "/merchants/#{@merchant.id}/items"
-  
+        save_and_open_page
         expect(page).to have_content("My Items")
         expect(page).to have_content(@item.name)
         expect(page).to have_content(@item2.name)
