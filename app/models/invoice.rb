@@ -14,5 +14,5 @@ class Invoice < ApplicationRecord
 					.group("invoices.id")
 					.order("invoices.id")
 	end
-	
+
 end

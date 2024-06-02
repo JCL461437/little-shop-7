@@ -85,7 +85,7 @@ RSpec.describe 'admin index' do
         ii_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
         ii_4 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
         ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
-        #need to add orderly assertion, and more invoices to prove it, and change created_at dates to verify
+
         visit "/admin"
        
         expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
@@ -93,7 +93,6 @@ RSpec.describe 'admin index' do
         expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
         expect(page).to_not have_content(invoice_3.id)
       end
-      #update model test for class method
 
       xit "and each invoice id links to that invoice's admin show page" do
         visit "/admin"
