@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'admin index' do
-  
+  include ApplicationHelper
+
   describe 'As an admin, when I visit the admin dashboard' do
     
     describe "header and links" do 
@@ -75,7 +76,7 @@ RSpec.describe 'admin index' do
         # enum "shipped" = 2
         customer_1 = Customer.create!
         merchant_1 = Merchant.create!
-        invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0)
+        invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
         invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 0)
         invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
         item_1 = Item.create!(merchant_id: merchant_1.id)
@@ -84,13 +85,20 @@ RSpec.describe 'admin index' do
         ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
         ii_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
         ii_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
-
-        binding.pry
+        #need to add more ii's because could have multiple items(and ii's) on one invoice
+        #need to add orderly assertion, and more invoices to prove it, and change created_at dates to verify
         visit "/admin"
-
+        # save_and_open_page
+        binding.pry
+        expect(page).to have_content("Invoice ##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
+        expect(page).to have_content("Invoice ##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
+        expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
+        expect(page).to_not have_content(invoice_3.id)
       end
 
-      it "and each invoice id links to that invoice's admin show page" do
+      #update model test for class method
+
+      xit "and each invoice id links to that invoice's admin show page" do
         visit "/admin"
       end
 

@@ -13,4 +13,8 @@
 
 <div>
 <h3>Incomplete Invoices</h3>
+<% @incomplete_invoices.each do |invoice| %>
+<%# <%   binding.pry %> 
+  <p><%= "Invoice##{invoice.id} - #{formatted_date(invoice.created_at)}" %>
+<% end %>
 </div>
