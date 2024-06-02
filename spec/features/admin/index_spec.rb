@@ -67,13 +67,11 @@ RSpec.describe 'admin index' do
     describe "incomplete invoices section" do
       it "shows section for Incomplete Invoices" do 
         visit "/admin"
-        # save_and_open_page
+
         expect(page).to have_content("Incomplete Invoices")
       end
 
       it "shows list of the ids of all invoices that have items that have not yet been shipped" do
-        # setup: 2 invoices w items not shipped, 1 invoice with shipped item (invoice_items.status) 
-        # enum "shipped" = 2
         customer_1 = Customer.create!
         merchant_1 = Merchant.create!
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
@@ -83,23 +81,24 @@ RSpec.describe 'admin index' do
         item_2 = Item.create!(merchant_id: merchant_1.id)
         item_3 = Item.create!(merchant_id: merchant_1.id)
         ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
-        ii_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
-        ii_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
-        #need to add more ii's because could have multiple items(and ii's) on one invoice
+        ii_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        ii_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
+        ii_4 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
+        ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
         #need to add orderly assertion, and more invoices to prove it, and change created_at dates to verify
         visit "/admin"
-        # save_and_open_page
-        binding.pry
-        expect(page).to have_content("Invoice ##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
-        expect(page).to have_content("Invoice ##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
+       
+        expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
+        expect(page).to have_content("Invoice##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
         expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
         expect(page).to_not have_content(invoice_3.id)
       end
-
       #update model test for class method
 
       xit "and each invoice id links to that invoice's admin show page" do
         visit "/admin"
+         # save_and_open_page
+          # binding.pry
       end
 
     end
