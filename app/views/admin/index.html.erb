@@ -14,7 +14,6 @@
 <div>
 <h3>Incomplete Invoices</h3>
 <% @incomplete_invoices.each do |invoice| %>
-<%# <%   binding.pry %> 
-  <p><%= "Invoice##{invoice.id} - #{formatted_date(invoice.created_at)}" %>
-<% end %>
+  <p><%= link_to "Invoice##{invoice.id}", admin_invoice_path(invoice) %> - <%= formatted_date(invoice.created_at) %> </p>
+  <% end %>
 </div>

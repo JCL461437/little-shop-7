@@ -87,14 +87,14 @@ RSpec.describe 'admin index' do
         ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
 
         visit "/admin"
-       
+        save_and_open_page
         expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
         expect(page).to have_content("Invoice##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
         expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
         expect(page).to_not have_content(invoice_3.id)
       end
 
-      xit "and each invoice id links to that invoice's admin show page" do
+      it "and each invoice id links to that invoice's admin show page" do
         customer_1 = Customer.create!
         merchant_1 = Merchant.create!
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
@@ -102,12 +102,12 @@ RSpec.describe 'admin index' do
         ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
 
         visit "/admin"
-         save_and_open_page
-          # binding.pry
+
         expect(page).to have_link("#{invoice_1.id}")
         
         click_link("#{invoice_1.id}")
-        expect(current_path).to eq(admin_invoice(invoice_1))
+        
+        expect(current_path).to eq(admin_invoice_path(invoice_1))
       end
 
     end
