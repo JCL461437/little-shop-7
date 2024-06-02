@@ -21,14 +21,20 @@ RSpec.describe "Items Show Page" do
         visit "/merchants/#{@merchant.id}/items"
 
         click_on("Candle")
-        
+
         expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item.id}"
-  
-        save_and_open_page
 
         expect(page).to have_content(@item.name)
         expect(page).to have_content(@item.description)
-        expect(page).to have_content(@item.unit_price)
+        expect(page).to have_content("$10.00")
+
+        expect(page).to_not have_content(@item2.name)
+        expect(page).to_not have_content(@item2.description)
+        expect(page).to_not have_content(@item2.unit_price)
+
+        expect(page).to_not have_content(@item3.name)
+        expect(page).to_not have_content(@item3.description)
+        expect(page).to_not have_content(@item3.unit_price)
       end
     end
   end
