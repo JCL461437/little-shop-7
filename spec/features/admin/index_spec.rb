@@ -108,7 +108,6 @@ RSpec.describe 'admin index' do
 
         expect(current_path).to eq(admin_invoice_path(invoice_1))
       end
-
     end
   end
 end
