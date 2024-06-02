@@ -87,7 +87,6 @@ RSpec.describe 'admin index' do
         ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
 
         visit "/admin"
-        save_and_open_page
         expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
         expect(page).to have_content("Invoice##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
         expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
@@ -106,7 +105,7 @@ RSpec.describe 'admin index' do
         expect(page).to have_link("#{invoice_1.id}")
         
         click_link("#{invoice_1.id}")
-        
+
         expect(current_path).to eq(admin_invoice_path(invoice_1))
       end
 
