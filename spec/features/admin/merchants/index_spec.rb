@@ -38,15 +38,21 @@ RSpec.describe "admin merchants index" do
       # Then I am redirected back to the admin merchants index
       # And I see that the merchant's status has changed
       it "Displays a button that can change a merchant's status" do
+        merchant_1 = Merchant.create!(name: "Mans Machines", status: 1)
+        merchant_2 = Merchant.create!(name: "Guys Gizzmos", status: 1)
+        merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
+        merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
 
         visit admin_merchants_path
 
         within ('#enabled_merchants') do
-          expect(page).to have_content()
+          expect(page).to have_content(merchant_1)
+          expect(page).to have_content(merchant_2)
         end
         
         within ('#disabled_merchants') do
-          expect(page).to have_content()
+          expect(page).to have_content(merchant_3)
+          expect(page).to have_content(merchant_4)
         end
 
       end
