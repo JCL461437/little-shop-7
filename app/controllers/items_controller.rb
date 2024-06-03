@@ -9,13 +9,15 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(item_params[:id])
   end
 
   def update
+    @merchant = Merchant.find(params[:merchant_id])
     item = Item.find(item_params[:id])
     if item.update(item_params)
-      redirect_to "/items/#{item.id}"
+      redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
       flash[:alert] = "Item Information Successfully Updated!"
     else
       redirect_to "/items/#{item.id}/edit"
