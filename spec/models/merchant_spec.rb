@@ -113,5 +113,28 @@ RSpec.describe Merchant, type: :model do
       #     expect(merchant.count_successful_transactions(customer_6)).to eq(0)
       #   end
       # end
+
+      describe "#enabled_customers" do
+        it "returns all merchants with an enabled status" do
+          merchant_1 = Merchant.create!(name: "Mans Machines", status: 1)
+          merchant_2 = Merchant.create!(name: "Guys Gizzmos", status: 1)
+          merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
+          merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
+          
+          expect(merchant.enabled).to eq([merchant_1, merchant_2)
+        end
+      end
+
+      describe "#disabled_customers" do
+        it "returns all merchants with an enabled status" do
+          merchant_1 = Merchant.create!(name: "Mans Machines", status: 1)
+          merchant_2 = Merchant.create!(name: "Guys Gizzmos", status: 1)
+          merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
+          merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
+          
+          expect(merchant.enabled).to eq([merchant_3, merchant_4)
+        end
+      end
+    end
   end
 end
