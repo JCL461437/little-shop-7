@@ -1,3 +1,7 @@
 <h1> Admin: Merchant </h1>
 
 <%= @merchant.name %>
+
+<%= form_with model: Merchant, data: {turbo: false} do |f| %>
+  <%= f.label :name %>
+  <%= f. %>
