@@ -41,7 +41,7 @@ RSpec.describe Merchant, type: :model do
         expect(merchant.items_ready_to_ship).to eq([item_1, item_2])
       end
     end
-    
+
     describe "#top_customers" do
       it "returns the top 5 customers with the most successful transactions for a specific merchant" do
         customer_1 = create(:customer)
@@ -122,7 +122,10 @@ RSpec.describe Merchant, type: :model do
         merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
         merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
         
-        expect(merchant.enabled).to eq([merchant_1, merchant_2])
+        enabled_merchants = Merchant.enabled_merchants
+
+        expect(enabled_merchants).to include(merchant_1, merchant_2)
+        expect(enabled_merchants).not_to include(merchant_3, merchant_4)
       end
     end
 
@@ -133,7 +136,10 @@ RSpec.describe Merchant, type: :model do
         merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
         merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
         
-        expect(merchant.disabled).to eq([merchant_3, merchant_4])
+        disabled_merchants = Merchant.disabled_merchants
+
+        expect(disabled_merchants).to include(merchant_3, merchant_4)
+        expect(disabled_merchants).not_to include(merchant_1, merchant_2)
       end
     end
   end
