@@ -1,5 +1,5 @@
 <h1>Edit Item</h1>
-<%= form_with url: "/merchants/#{@merchant.id}/items/#{@item.id}", method: :patch, local: true do |f| %>
+<%= form_with model: [@item, @merchant], local: true, data: {turbo: false} do |f| %>
   <p><%= f.label :name %>
   <%= f.text_field :name %></p>
 
