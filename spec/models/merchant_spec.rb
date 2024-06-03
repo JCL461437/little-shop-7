@@ -121,7 +121,7 @@ RSpec.describe Merchant, type: :model do
           merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
           merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
           
-          expect(merchant.enabled).to eq([merchant_1, merchant_2)
+          expect(merchant.enabled).to eq([merchant_1, merchant_2])
         end
       end
 
@@ -132,7 +132,7 @@ RSpec.describe Merchant, type: :model do
           merchant_3 = Merchant.create!(name: "Weasels Wallets", status: 0)
           merchant_4 = Merchant.create!(name: "Donkeys Doorknobs ", status: 0)
           
-          expect(merchant.enabled).to eq([merchant_3, merchant_4)
+          expect(merchant.enabled).to eq([merchant_3, merchant_4])
         end
       end
     end
