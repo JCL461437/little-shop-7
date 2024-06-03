@@ -26,3 +26,5 @@
         <% end %>
     </tbody>
 </table>
+<h2>Total Possibe Revenue For Mechant</h2>
+<p> Total: <%= number_to_currency(@invoice.merchant_total_revenue(@merchant) / 100.0) %> </p>
