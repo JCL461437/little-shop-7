@@ -35,4 +35,12 @@ class Merchant < ApplicationRecord
             .select('customers.*, COUNT(transactions.id) AS transactions_count')
             .limit(5)
   end
+
+  def enabled_merchants
+    @enabled_merchants = Merchant.where(status: [:enabled])
+  end
+
+  def disabled_merchants
+    @disabled_merchants = Merchant.where(status: [:disabled])
+  end
 end
