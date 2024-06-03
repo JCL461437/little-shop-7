@@ -16,10 +16,11 @@ class ItemsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:merchant_id])
-    @item = Item.find(item_params[:id])
+    @item = @merchant.items.find(params[:id])
+    
     if @item.update!(item_params)
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
-      flash[:alert] = "Item Information Successfully Updated!"
+      flash[:notice] = "Item Information Successfully Updated!"
     else
       redirect_to "merchants/#{@merchant.id}/items/#{@item.id}/edit"
       flash[:alert] = "Error: Please Fill in All Fields"
@@ -27,7 +28,8 @@ class ItemsController < ApplicationController
   end
   
   private
+
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price)
+    params.permit(:id, :name, :description, :unit_price)
   end
 end

@@ -1,5 +1,5 @@
 <h1>Edit Item</h1>
-<%= form_with model: [@item, @merchant], local: true, data: {turbo: false} do |f| %>
+<%= form_with model: [@merchant, @item], local: true, data: {turbo: false} do |f| %>
   <p><%= f.label :name %>
   <%= f.text_field :name %></p>
 
