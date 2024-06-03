@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Items Show Page" do
+RSpec.describe "Items Edit/Update Page" do
   before(:each) do
     @merchant = create(:merchant)
     @item = @merchant.items.create!(name: "Candle", description: "Pine Scented", unit_price: 1000)

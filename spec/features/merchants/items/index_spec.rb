@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Merchant Show Page" do
+RSpec.describe "Merchant Index Page" do
   before(:each) do
     @merchant = create(:merchant)
     @merchant2 = create(:merchant)
@@ -24,5 +24,14 @@ RSpec.describe "Merchant Show Page" do
         expect(page).to_not have_content(@item3.name)
       end
     end
+  end
+# User Story 9 - Merchant Item Disable/Enable
+# As a merchant
+# When I visit my items index page (/merchants/:merchant_id/items)
+# Next to each item name I see a button to disable or enable that item.
+# When I click this button
+# Then I am redirected back to the items index
+# And I see that the items status has changed
+  describe "As a Merchant" do
   end
 end
