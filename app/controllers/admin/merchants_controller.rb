@@ -8,4 +8,16 @@ class Admin::MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
   end
+
+  def update 
+    @merchant = Merchant.find(params[:id])
+    if params[:status] == "enabled"
+      @merchant.enabled!
+      notice = 'Merchant has been enabled.'
+    elsif params[:status] == "disabled"
+      @merchant.disabled!
+      notice = 'Merchant has been disabled.'
+    end
+    redirect_to admin_merchant_path, notice: notice
+  end
 end
