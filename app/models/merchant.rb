@@ -2,6 +2,8 @@ class Merchant < ApplicationRecord
   has_many :items
   has_many :invoices, through: :items
   has_many :customers, through: :invoices
+
+  enum status: {disabled: 0, enabled: 1}
   
   def items_ready_to_ship
     items.joins(invoice_items: :invoice)
