@@ -18,6 +18,6 @@ class Admin::MerchantsController < ApplicationController
       @merchant.disabled!
       notice = 'Merchant has been disabled.'
     end
-    redirect_to admin_merchant_path, notice: notice
+    redirect_back fallback_location: admin_merchant_path, notice: notice
   end
 end
