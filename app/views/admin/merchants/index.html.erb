@@ -1,7 +1,18 @@
 <h1> Admin: Merchants </h1>
 
-<ol>
-  <% @merchants.each do |merchant| %></li>
-    <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
-  <% end %>
-</ol>
+<div id="enabled _merchants">
+  <ol>
+    <% @merchants.each do |merchant| %></li>
+      <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
+    <% end %>
+  </ol>
+</div>
+
+<div id="disabled_merchants">
+  <ol>
+    <% @merchants.each do |merchant| %></li>
+      <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
+    <% end %>
+  </ol>
+</div>
+
