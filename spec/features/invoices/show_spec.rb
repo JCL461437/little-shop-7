@@ -30,5 +30,21 @@ RSpec.describe "Merchant Invoice Show Page" do
             expect(page).to have_content(invoice_item.unit_price/100.to_f)
             expect(page).to have_content(invoice_item.status)
         end
+        # 17. Merchant Invoice Show Page: Total Revenue
+
+        # As a merchant
+        # When I visit my merchant invoice show page (/merchants/:merchant_id/invoices/:invoice_id)
+        # Then I see the total revenue that will be generated from all of my items on the invoice
+        scenario "I see the total revenue that will be generated from all of my items on the invoice" do
+            merchant = create(:merchant)
+            customer = create(:customer)
+            item = create(:item, merchant: merchant)
+            invoice = create(:invoice, customer: customer)
+            invoice_item = create(:invoice_item, invoice: invoice, item: item)
+
+            visit merchant_invoice_path(merchant, invoice)
+
+            expect(page).to have_content("Total Revenue: #{invoice_item.quantity * (invoice_item.unit_price/100.to_f)}")
+        end
     end
 end
