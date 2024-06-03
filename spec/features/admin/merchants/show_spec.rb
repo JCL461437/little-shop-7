@@ -15,19 +15,20 @@ RSpec.describe "admin merchants show" do
         merchant_1 = Merchant.create!(name: "Acme")
         
         visit admin_merchant_path(merchant_1)
+
         click_link("Update Merchant")
 
         expect(current_path).to eq(edit_admin_merchant_path(merchant_1))
-        expect(page).to have_content("Acme")
+        expect(page).to have_field("Name", with: "Acme")
       end
 
       it "when I update the form and click 'submit' I am redirected to /admin/merchants/:merchant_id and see updated info and flash message of successful update" do
         merchant_1 = Merchant.create!(name: "Acme")
         
-        visit admin_merchant_path(merchant_1)
-        click_link("Update Merchant")
+        visit edit_admin_merchant_path(merchant_1)
 
         fill_in "Name", with: "Acme Inc."
+
         click_button "submit"
 
         expect(current_path).to eq(admin_merchant_path(merchant_1))
