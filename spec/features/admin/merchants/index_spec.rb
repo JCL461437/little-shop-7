@@ -21,11 +21,12 @@ RSpec.describe "admin merchants index" do
         merchant_2 = Merchant.create!(name: "BigBox")
         
         visit admin_merchants_path
-        # binding.pry
 
         click_link("#{merchant_1.name}")
 
         expect(current_path).to eq(admin_merchant_path(merchant_1))
+        expect(page).to have_content("Acme")
+        expect(page).to_not have_content("BigBox")
       end
     end
   end
