@@ -5,7 +5,6 @@ RSpec.describe "admin merchants show" do
     describe "display" do
       it "I see a link to update the merchant's information" do
         merchant_1 = Merchant.create!(name: "Acme")
-        
         visit admin_merchant_path(merchant_1)
 
         expect(page).to have_link("Update Merchant")
@@ -30,9 +29,10 @@ RSpec.describe "admin merchants show" do
         fill_in "Name", with: "Acme Inc."
 
         click_button "submit"
-
+        save_and_open_page
         expect(current_path).to eq(admin_merchant_path(merchant_1))
         expect(page).to have_content("Acme Inc.")
+        expect(page).to have_content("Information has been successfully updated")
       end
     end
 
