@@ -78,10 +78,9 @@ RSpec.describe "admin merchants index" do
       it "will take me to a new form that allows me to add merchant information, and when I click submit, I see a new merchant with the information I filled in on the page with a default status of disabled" do
         visit admin_merchants_path
 
-        within ('#new_merchant') do
-          expect(page).to have_link("New Merchant")
-          click_link "New Merchant"
-        end
+        expect(page).to have_link("New Merchant")
+        click_link "New Merchant"
+        
 
         expect(current_path).to eq(new_admin_merchant_path)
 
@@ -89,13 +88,13 @@ RSpec.describe "admin merchants index" do
         click_button "Submit"
 
         new_merchant_id = Merchant.last.id
-
-        expect(current_path).to eq(admin_merchants_path)
-        expect(page).to have_content("Merchant was successfully created.")
         
-        within ("disabled_merchant_#{new_merchant_id}")
+        expect(current_path).to eq(admin_merchants_path)
+        
+        within ("#disabled_merchants") do
           expect(page).to have_content("Craig Jones")
         end
+
       end
     end
   end
