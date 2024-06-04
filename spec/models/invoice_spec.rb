@@ -17,7 +17,7 @@ RSpec.describe Invoice, type: :model do
 		context "#incomplete_invoices" do
 			it "should return all invoices with unshipped items from oldest to newest" do
 				customer_1 = Customer.create!
-        merchant_1 = Merchant.create!
+        merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
         invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 0)
         invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)

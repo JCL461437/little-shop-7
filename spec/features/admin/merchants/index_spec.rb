@@ -81,7 +81,6 @@ RSpec.describe "admin merchants index" do
         expect(page).to have_link("New Merchant")
         click_link "New Merchant"
         
-
         expect(current_path).to eq(new_admin_merchant_path)
 
         fill_in "Name", with: "Craig Jones"
