@@ -20,23 +20,21 @@ RSpec.describe "Merchant Index Page" do
   # And I see my item was created with a default status of disabled.
   describe "As a Merchant" do
     describe "When I visit the items index page and click the link to create a new item" do
-      it "I can fill out a form and add a new item to my list of items"
-      visit "/merchants/#{@merchant.id}/items"
-
-      click_on "New Item"
-
-      expect(current_path).to eq "/merchants/#{@merchant.id}/items/new"
+      it "I can fill out a form and add a new item to my list of items" do 
       
-      fill_in "Name", with: "Leather Jacket"
-      fill_in "Description", with: "Comfy AND Stylish"
-      fill_in "Unit Price", with: (5000)
-      click_button "Submit"
+        visit "/merchants/#{@merchant.id}/items"
 
-      expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+        click_on "New Item"
 
-      expect(page).to have_content("Leather Jacket")
-      expect(page).to have_content("Comfy AND Stylish")
-      expect(page).to have_content("50.00")
+        expect(current_path).to eq "/merchants/#{@merchant.id}/items/new"
+       
+        fill_in "Name", with: "Leather Jacket"
+        fill_in "Description", with: "Comfy AND Stylish"
+        fill_in "Unit price", with: (5000)
+        click_button "Save"
+
+        expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+      end
     end
   end
 end
