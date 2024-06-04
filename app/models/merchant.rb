@@ -11,20 +11,6 @@ class Merchant < ApplicationRecord
           .distinct
   end
 
-  # def top_customers
-  #   customers.joins(:transactions)
-  #           .where('transactions.result = ?', 0)
-  #           .group('customers.id')
-  #           .order('count(transactions.id) desc')
-  #           .limit(5)
-  # end
-
-  # def count_successful_transactions(customer)
-  #   invoices.joins(:transactions)
-  #           .where(customer_id: customer.id, transactions: { result: 0 })
-  #           .count('transactions.id')
-  # end
-
   def top_customers
     customers.joins(invoices: :transactions)
             .where(transactions: { result: 0 })
