@@ -25,7 +25,7 @@ RSpec.describe "Merchant Index Page" do
       end
     end
   end
-  # User Story 9 - Merchant Item Disable/Enable
+# User Story 9 - Merchant Item Disable/Enable
 # As a merchant
 # When I visit my items index page (/merchants/:merchant_id/items)
 # Next to each item name I see a button to disable or enable that item.
@@ -35,9 +35,10 @@ RSpec.describe "Merchant Index Page" do
 describe "As a Merchant" do
   it "There is a button to disable/enable the item" do
     visit "/merchants/#{@merchant.id}/items"
-    save_and_open_page
+    
     within "#item-#{@item.id}" do
-   
+    save_and_open_page
+  #  require 'pry'; binding.pry
     click_on("Enable")
     expect(current_path).to eq "/merchants/#{@merchant.id}/items"
     expect(page).to have_content("Disable")

@@ -24,6 +24,9 @@ class ItemsController < ApplicationController
       redirect_to "/items/#{item.id}/edit"
       flash[:alert] = "Error: Please Fill in All Fields"
     end
+    if item.update(params[:status])
+      item.enable
+    end
   end
 
   def item_params
