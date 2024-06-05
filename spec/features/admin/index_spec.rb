@@ -73,7 +73,7 @@ RSpec.describe 'admin index' do
 
       it "shows list of the ids of all invoices that have items that have not yet been shipped" do
         customer_1 = Customer.create!
-        merchant_1 = Merchant.create!
+        merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
         invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 0)
         invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
@@ -95,7 +95,7 @@ RSpec.describe 'admin index' do
 
       it "and each invoice id links to that invoice's admin show page" do
         customer_1 = Customer.create!
-        merchant_1 = Merchant.create!
+        merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
         item_1 = Item.create!(merchant_id: merchant_1.id)
         ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
