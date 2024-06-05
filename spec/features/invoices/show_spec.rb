@@ -35,12 +35,12 @@ RSpec.describe "Merchant Invoice Show Page" do
             customer = create(:customer)
             item = create(:item, merchant: merchant)
             invoice = create(:invoice, customer: customer)
-            invoice_item = create(:invoice_item, invoice: invoice, item: item)
+            invoice_item = create(:invoice_item, invoice: invoice, item: item, quantity: 2, unit_price: 1000)
 
             visit merchant_invoice_path(merchant, invoice)
 
             expect(page).to have_content("Total Possibe Revenue For Mechant")
-            expect(page).to have_content("Total: $#{invoice_item.quantity * (invoice_item.unit_price/100.to_f).round(2)}")
+            expect(page).to have_content("Total: $20.00")
         end
         scenario "I can update the status of an item on the invoice" do
             merchant = create(:merchant)

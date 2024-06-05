@@ -87,7 +87,6 @@ RSpec.describe 'admin index' do
         InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
 
         visit "/admin"
-        
         expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
         expect(page).to have_content("Invoice##{invoice_2.id} - #{formatted_date(invoice_2.created_at)}")
         expect("#{invoice_1.id}").to appear_before("#{invoice_2.id}")
@@ -98,7 +97,7 @@ RSpec.describe 'admin index' do
         customer_1 = Customer.create!
         merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
-        item_1 = Item.create!(merchant_id: merchant_1.id)
+        item_1 = Item.create!(merchant_id: merchant_1.id, unit_price: 1000)
         InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
 
         visit "/admin"
