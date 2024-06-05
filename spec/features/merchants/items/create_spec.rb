@@ -34,6 +34,7 @@ RSpec.describe "Merchant Index Page" do
 
         expect(current_path).to eq "/merchants/#{@merchant.id}/items"
         expect(page).to have_content("Leather Jacket")
+        # expect(page).to have_content("Enable")
       end
     end
   end
