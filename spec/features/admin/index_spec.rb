@@ -97,7 +97,7 @@ RSpec.describe 'admin index' do
         customer_1 = Customer.create!
         merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
-        item_1 = Item.create!(merchant_id: merchant_1.id)
+        item_1 = Item.create!(merchant_id: merchant_1.id, unit_price: 1000)
         ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
 
         visit "/admin"
