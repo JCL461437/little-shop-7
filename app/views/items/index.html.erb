@@ -5,7 +5,7 @@
     <% @enabled_items.each do |item| %>
       <li id="enabled_item_<%= item.id %>">
         <%= link_to "#{item.name}", "items/#{item.id}" %>
-         <%= button_to "Disable", merchant_item_path(@merchant, item, status: :disabled), method: :patch, class: 'btn btn-warning' %>
+        <%= button_to "Disable", merchant_item_path(@merchant, item, status: :disabled), method: :patch, class: 'btn btn-warning' %>
       </li>
     <% end %>
   </ol>
@@ -18,6 +18,19 @@
       <li id="disabled_item_<%= item.id %>">
         <%= link_to "#{item.name}", "items/#{item.id}" %>
         <%= button_to "Enable", merchant_item_path(@merchant, item, status: :enabled), method: :patch, class: 'btn btn-success' %>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
+<div id="top_5_items">
+  <h2> Top 5 Items </h2>
+  <ol>
+    <% @merchant.items.top_five_items.each do |item| %>
+      <li>
+        <%= link_to "#{item.name}", merchant_item_path(@merchant, item) %>
+        <p>Revenue: <%= number_to_currency(item.revenue/100) %></p>
+        <p>Best Day: <%=item.best_day.strftime('%A, %B %d, %Y')%></p>
       </li>
     <% end %>
   </ol>
