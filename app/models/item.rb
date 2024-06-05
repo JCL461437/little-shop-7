@@ -18,4 +18,17 @@ class Item < ApplicationRecord
 # item.name
 # item.revenue
 
+  def best_day
+    invoices.joins(:transactions)
+            .where(transactions: {result: 'success'})
+            .select('invoices.created_at, SUM(invoice_items.quantity)')
+            .group('invoices.id, invoices.created_at')
+            .order('SUM(invoice_items.quantity) DESC, invoices.created_at DESC')
+            .first
+            .created_at
+  end
+  # call @merchant.items.top_five_items.each do |item|
+  # item.best_day
+
+
 end
