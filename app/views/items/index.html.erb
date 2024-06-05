@@ -1,4 +1,31 @@
 <h1>My Items</h1>
-<% @merchant.items.each do |item| %>
-  <p><%= link_to item.name, "items/#{item.id}" %></p>
-<% end %>
+<div id="enabled_items">
+  <h2> Enabled Items </h2>
+  <ol>
+    <% @enabled_items.each do |item| %>
+      <li id="enabled_item_<%= item.id %>">
+        <%= link_to "#{item.name}", "items/#{item.id}" %>
+         <%= button_to "Disable", merchant_item_path(@merchant, item, status: :disabled), method: :patch, class: 'btn btn-warning' %>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
+<div id="disabled_items">
+  <h2> Disabled Items </h2>
+  <ol>
+    <% @disabled_items.each do |item| %>
+      <li id="disabled_item_<%= item.id %>">
+        <%= link_to "#{item.name}", "items/#{item.id}" %>
+        <%= button_to "Enable", merchant_item_path(@merchant, item, status: :enabled), method: :patch, class: 'btn btn-success' %>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
+
+
+
+
+
+
