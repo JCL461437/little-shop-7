@@ -5,11 +5,13 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
 
-  def enable
-    update(status: "Enabled")
+  enum status: {disabled: 0, enabled: 1}
+
+  def self.enabled_items
+    Item.where(status: [:enabled])
   end
 
-  def disable
-  	update(status: "Disabled")
+  def self.disabled_items
+    Item.where(status: [:disabled])
   end
 end

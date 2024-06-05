@@ -32,17 +32,17 @@ RSpec.describe "Merchant Index Page" do
 # When I click this button
 # Then I am redirected back to the items index
 # And I see that the items status has changed
-describe "As a Merchant" do
-  it "There is a button to disable/enable the item" do
-    visit "/merchants/#{@merchant.id}/items"
+  describe "As a Merchant" do
+    it "There is a button to disable/enable the item" do
+      visit "/merchants/#{@merchant.id}/items"
     
-    within "#item-#{@item.id}" do
-    save_and_open_page
-  #  require 'pry'; binding.pry
-    click_on("Enable")
-    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
-    expect(page).to have_content("Disable")
+      within "#disabled_item_#{@item.id}" do
+      # save_and_open_page
+      # require 'pry'; binding.pry
+      click_on("Enable")
+      expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+      expect(page).to have_content("Disable")
+      end
     end
   end
-end
 end
