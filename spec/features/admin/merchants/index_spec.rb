@@ -87,13 +87,16 @@ RSpec.describe "admin merchants index" do
         
         expect(current_path).to eq(new_admin_merchant_path)
 
+        fill_in "Name", with: ""
+        click_button "Submit"
+        expect(page).to have_content("Please fill out all the required fields.")
+        
         fill_in "Name", with: "Craig Jones"
         click_button "Submit"
-        
+
         new_merchant_id = Merchant.last.id
         
         expect(current_path).to eq(admin_merchants_path)
-        expect(page).to have_content("Please fill out all the required fields.")
         
         within ("#disabled_merchants") do
           expect(page).to have_content("Craig Jones")
