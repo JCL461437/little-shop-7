@@ -26,8 +26,8 @@ class Admin::MerchantsController < ApplicationController
     if @merchant.save
       redirect_to admin_merchants_path, notice: 'Merchant was successfully created.'
     else
-      # Not Working, needs to be refactored
-      flash.now[:notice] = 'Please fill out all the required fields.'
+      #Not Working, needs to be refactored
+      flash[:alert] = "Please fill out all the required fields."
       render :new
     end
   end
