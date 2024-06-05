@@ -10,20 +10,11 @@ RSpec.describe "Admin Invoices Show Page" do
 
             within("#invoice_info") do
                 expect(page).to have_content("Invoice ID: #{invoice.id}")
-                expect(page).to have_content("Status: #{invoice.status}")
+                expect(page).to have_select('invoice_status', selected: invoice.status.titleize)
                 expect(page).to have_content("Invoice Date: #{invoice.created_at.strftime("%A, %B %d, %Y")}")
                 expect(page).to have_content("Customer: #{customer.first_name} #{customer.last_name}")
             end
         end
-        # 34. Admin Invoice Show Page: Invoice Item Information
-
-        # As an admin
-        # When I visit an admin invoice show page (/admin/invoices/:invoice_id)
-        # Then I see all of the items on the invoice including:
-        # - Item name
-        # - The quantity of the item ordered
-        # - The price the Item sold for
-        # - The Invoice Item status
         scenario "I see all of the items on the invoice including: Item name, quantity, price, and status" do
             customer = create(:customer)
             invoice = create(:invoice, customer: customer)
@@ -58,6 +49,22 @@ RSpec.describe "Admin Invoices Show Page" do
             within("#invoice_total_revenue") do
                 expect(page).to have_content("Total Revenue: $300.00")
             end
+        end
+        scenario "I see the invoice status is a select field and I can update the status" do
+            customer = create(:customer)
+            invoice = create(:invoice, customer: customer)
+
+            visit admin_invoice_path(invoice)
+
+            within("#invoice_info") do
+                expect(page).to have_select("invoice_status", selected: invoice.status.titleize)
+                select "Completed", from: "invoice_status"
+                click_button "Update Invoice Status"
+            end
+
+            expect(current_path).to eq(admin_invoice_path(invoice))
+            expect(page).to have_select('invoice_status', selected: 'Completed')
+            expect(invoice.reload.status).to eq("completed")
         end
     end
 end

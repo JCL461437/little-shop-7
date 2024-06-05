@@ -1,8 +1,13 @@
 <div id="invoice_info">
     <h1> Invoice ID: <%= @invoice.id %> </h1>
     <p> Invoice Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
-    <p> Status: <%= @invoice.status %> </p>
     <p> Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
+    <%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch, local: true do |f| %>
+        <p> Status: <%= f.select :status, options_for_select(
+            Invoice.statuses.keys.map { |status| [status.titleize, status] },
+            @invoice.status) %> </p>
+        <p> <%= f.submit "Update Invoice Status" %> </p>
+    <% end %>
 </div>
 <div id="invoice_items">
     <h2> Items </h2>
