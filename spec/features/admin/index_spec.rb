@@ -80,11 +80,11 @@ RSpec.describe 'admin index' do
         item_1 = Item.create!(merchant_id: merchant_1.id)
         item_2 = Item.create!(merchant_id: merchant_1.id)
         item_3 = Item.create!(merchant_id: merchant_1.id)
-        ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
-        ii_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
-        ii_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
-        ii_4 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
-        ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
+        InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
+        InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
 
         visit "/admin"
         expect(page).to have_content("Invoice##{invoice_1.id} - #{formatted_date(invoice_1.created_at)}")
@@ -98,7 +98,7 @@ RSpec.describe 'admin index' do
         merchant_1 = Merchant.create!(name: "Joeman")
         invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 0, created_at: "Saturday, June 1, 2024")
         item_1 = Item.create!(merchant_id: merchant_1.id, unit_price: 1000)
-        ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
 
         visit "/admin"
 
