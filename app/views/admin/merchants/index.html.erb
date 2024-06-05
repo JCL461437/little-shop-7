@@ -26,5 +26,9 @@
   </ol>
 </div>
 
+<div>
 <h2> Top Merchants </h2>
-
+  <% @merchants.top_five_merchants.each_with_index do |merchant, index| %>
+    <p><%= link_to "#{index + 1}. #{merchant.name} - $#{merchant.revenue} in sales", admin_merchant_path(merchant) %></p>
+  <% end %>
+</div>

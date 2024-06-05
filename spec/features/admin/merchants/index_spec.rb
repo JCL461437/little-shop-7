@@ -129,43 +129,80 @@ RSpec.describe "admin merchants index" do
         invoice_7 = Invoice.create!(customer_id: customer_1.id, status: 1)
         invoice_8 = Invoice.create!(customer_id: customer_1.id, status: 0)
 
-        item_1 = Item.create!(merchant_id: merchant_1.id, unit_price: 10)
-        item_2 = Item.create!(merchant_id: merchant_1.id, unit_price: 10)
-        item_3 = Item.create!(merchant_id: merchant_2.id, unit_price: 10)
-        item_4 = Item.create!(merchant_id: merchant_3.id, unit_price: 10)
-        item_5 = Item.create!(merchant_id: merchant_4.id, unit_price: 10)
-        item_6 = Item.create!(merchant_id: merchant_5.id, unit_price: 10)
-        item_7 = Item.create!(merchant_id: merchant_6.id, unit_price: 10)
+        item_1 = Item.create!(merchant_id: merchant_1.id)
+        item_2 = Item.create!(merchant_id: merchant_1.id)
+        item_3 = Item.create!(merchant_id: merchant_2.id)
+        item_4 = Item.create!(merchant_id: merchant_3.id)
+        item_5 = Item.create!(merchant_id: merchant_4.id)
+        item_6 = Item.create!(merchant_id: merchant_5.id)
+        item_7 = Item.create!(merchant_id: merchant_6.id)
 
-        ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 1)
-        ii_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
-        ii_3 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 1)
-        ii_4 = InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: 1)
-        ii_5 = InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: 1)
-        ii_6 = InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: 1)
-        ii_7 = InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_7.id, status: 1)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 1, unit_price: 10, quantity: 2)
+        InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_6.id, invoice_id: invoice_6.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_7.id, invoice_id: invoice_7.id, status: 1, unit_price: 10, quantity: 1)
 
-        transaction_1 = invoice_1.transactions.create!(result: 0) 
-        transaction_2 = invoice_1.transactions.create!(result: 0) 
-        transaction_3 = invoice_1.transactions.create!(result: 0) 
-        transaction_4 = invoice_1.transactions.create!(result: 0) 
-        transaction_5 = invoice_1.transactions.create!(result: 0) 
-        transaction_6 = invoice_1.transactions.create!(result: 0) 
-        transaction_7 = invoice_1.transactions.create!(result: 1) 
+        invoice_1.transactions.create!(result: 0) 
+        invoice_2.transactions.create!(result: 0) 
+        invoice_3.transactions.create!(result: 0) 
+        invoice_4.transactions.create!(result: 0) 
+        invoice_5.transactions.create!(result: 0) 
+        invoice_6.transactions.create!(result: 0) 
+        invoice_7.transactions.create!(result: 1) 
+
+        visit admin_merchants_path
+        # save_and_open_page
+        expect(page).to have_content("Top Merchants")
+        expect(page).to have_content("A - $30 in sales")
+        expect(page).to have_content("B - $10 in sales")
+        expect(page).to have_content("C - $10 in sales")
+        expect(page).to have_content("D - $10 in sales")
+        expect(page).to have_content("E - $10 in sales")
+        expect(page).to_not have_content("F - $0 in sales")
+      end
+
+      it "each merchants name links to the admin merchant show page for that merchant" do 
+        merchant_1 = Merchant.create!(name: "A")
+        merchant_2 = Merchant.create!(name: "B")
+        merchant_3 = Merchant.create!(name: "C")
+        merchant_4 = Merchant.create!(name: "D")
+        merchant_5 = Merchant.create!(name: "E")
+
+        customer_1 = Customer.create!(first_name: "Jan", last_name: "Monkey")
+
+        invoice_1 = Invoice.create!(customer_id: customer_1.id, status: 1)
+        invoice_2 = Invoice.create!(customer_id: customer_1.id, status: 1)
+        invoice_3 = Invoice.create!(customer_id: customer_1.id, status: 1)
+        invoice_4 = Invoice.create!(customer_id: customer_1.id, status: 1)
+        invoice_5 = Invoice.create!(customer_id: customer_1.id, status: 1)
+
+        item_1 = Item.create!(merchant_id: merchant_1.id)
+        item_2 = Item.create!(merchant_id: merchant_1.id)
+        item_3 = Item.create!(merchant_id: merchant_2.id)
+        item_4 = Item.create!(merchant_id: merchant_3.id)
+        item_5 = Item.create!(merchant_id: merchant_4.id)
+        item_6 = Item.create!(merchant_id: merchant_5.id)
+
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 1, unit_price: 10, quantity: 2)
+        InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_4.id, invoice_id: invoice_4.id, status: 1, unit_price: 10, quantity: 1)
+        InvoiceItem.create!(item_id: item_5.id, invoice_id: invoice_5.id, status: 1, unit_price: 10, quantity: 1)
+
+        invoice_1.transactions.create!(result: 0) 
+        invoice_2.transactions.create!(result: 0) 
+        invoice_3.transactions.create!(result: 0) 
+        invoice_4.transactions.create!(result: 0) 
+        invoice_5.transactions.create!(result: 0) 
 
         visit admin_merchants_path
 
-        expect(page).to have_content("Top Merchants")
-        expect(page).to have_content("A - $20 in sales")
-        # expect(page).to have_content("B - $10 in sales")
-        # expect(page).to have_content("C - $10 in sales")
-        # expect(page).to have_content("D - $10 in sales")
-        # expect(page).to have_content("E - $10 in sales")
-        # expect(page).to_not have_content("F - $0 in sales")
-      end
+        click_link("A")
 
-      xit "each merchants name links to the admin merchant show page for that merchant" do 
-
+        expect(current_path).to eq(admin_merchant_path(merchant_1))
       end
 
     end

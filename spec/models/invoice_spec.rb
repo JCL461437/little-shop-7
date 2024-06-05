@@ -24,11 +24,11 @@ RSpec.describe Invoice, type: :model do
         item_1 = Item.create!(merchant_id: merchant_1.id)
         item_2 = Item.create!(merchant_id: merchant_1.id)
         item_3 = Item.create!(merchant_id: merchant_1.id)
-        ii_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
-        ii_2 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
-        ii_3 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
-        ii_4 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
-        ii_5 = InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_1.id, status: 0)
+        InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice_2.id, status: 0)
+        InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice_2.id, status: 1)
+        InvoiceItem.create!(item_id: item_3.id, invoice_id: invoice_3.id, status: 2)
 
 				incomplete_invoices = Invoice.incomplete_invoices
 
@@ -36,6 +36,7 @@ RSpec.describe Invoice, type: :model do
 			end
 		end
 	end
+
 	describe "instance methods" do
 		context "#merchant_total_revenue" do
 			it "should return the total revenue for a merchant's items on an invoice" do
@@ -48,6 +49,7 @@ RSpec.describe Invoice, type: :model do
 				expect(invoice.merchant_total_revenue(merchant)).to eq(invoice_item.quantity * invoice_item.unit_price)
 			end
 		end
+		
 		describe "#total_revenue" do
 			it "should return the total revenue for all items on an invoice" do
 				customer = create(:customer)
