@@ -8,11 +8,7 @@ RSpec.describe "Merchant Index Page" do
     @item2 = @merchant.items.create!(name: "Soap", description: "Fresh Spring", unit_price: 1500)
     @item3 = @merchant2.items.create!(name: "Coaster", description: "Mahogany", unit_price: 500)
   end
-# User Story 6 - Merchant Items Index Page
-# As a merchant,
-# When I visit my merchant items index page (merchants/:merchant_id/items)
-# I see a list of the names of all of my items
-# And I do not see items for any other merchant
+
   describe "As a Merchant" do
     describe "When I visit the merchant items index" do
       it "I see a list of only my items names" do
@@ -25,13 +21,17 @@ RSpec.describe "Merchant Index Page" do
       end
     end
   end
-# User Story 9 - Merchant Item Disable/Enable
-# As a merchant
-# When I visit my items index page (/merchants/:merchant_id/items)
-# Next to each item name I see a button to disable or enable that item.
-# When I click this button
-# Then I am redirected back to the items index
-# And I see that the items status has changed
+
   describe "As a Merchant" do
+    it "There is a button to disable/enable the item" do
+      visit "/merchants/#{@merchant.id}/items"
+    
+      within "#disabled_item_#{@item.id}" do
+        click_on("Enable")
+      end
+
+      expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+      expect(page).to have_content("Disable")
+    end
   end
 end

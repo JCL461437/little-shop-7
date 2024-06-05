@@ -31,4 +31,14 @@ class Item < ApplicationRecord
   # item.best_day
 
 
+
+  enum status: {disabled: 0, enabled: 1}
+
+  def self.enabled_items
+    Item.where(status: [:enabled])
+  end
+
+  def self.disabled_items
+    Item.where(status: [:disabled])
+  end
 end
