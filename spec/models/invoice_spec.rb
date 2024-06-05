@@ -48,5 +48,17 @@ RSpec.describe Invoice, type: :model do
 				expect(invoice.merchant_total_revenue(merchant)).to eq(invoice_item.quantity * invoice_item.unit_price)
 			end
 		end
+		describe "#total_revenue" do
+			it "should return the total revenue for all items on an invoice" do
+				customer = create(:customer)
+				invoice = create(:invoice, customer: customer)
+				item_1 = create(:item, unit_price: 10000)
+				item_2 = create(:item, unit_price: 2000)
+				create(:invoice_item, invoice: invoice, item: item_1, quantity: 2, unit_price: 10000)
+				create(:invoice_item, invoice: invoice, item: item_2, quantity: 5, unit_price: 2000)
+
+				expect(invoice.total_revenue).to eq(30000)
+			end
+		end
 	end
 end
