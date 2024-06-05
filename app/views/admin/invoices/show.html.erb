@@ -1,4 +1,25 @@
-<h1> Invoice ID: <%= @invoice.id %> </h1>
-<p> Invoice Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
-<p> Status: <%= @invoice.status %> </p>
-<p> Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
+<div id="invoice_info">
+    <h1> Invoice ID: <%= @invoice.id %> </h1>
+    <p> Invoice Date: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </p>
+    <p> Status: <%= @invoice.status %> </p>
+    <p> Customer: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %> </p>
+</div>
+<div id="invoice_items">
+    <h2> Items </h2>
+    <table>
+        <tr>
+            <th> Item </th>
+            <th> Quantity </th>
+            <th> Price </th>
+            <th> Status </th>
+        </tr>
+        <% @invoice.invoice_items.each do |invoice_item| %>
+        <tr>
+            <td> <%= invoice_item.item.name %> </td>
+            <td> <%= invoice_item.quantity %> </td>
+            <td> <%= number_to_currency(invoice_item.item.unit_price / 100) %> </td>
+            <td> <%= invoice_item.status %> </td>
+        </tr>
+        <% end %>
+    </table>
+</div>
