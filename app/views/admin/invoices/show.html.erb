@@ -23,3 +23,6 @@
         <% end %>
     </table>
 </div>
+<div id="invoice_total_revenue">
+    <h3> Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %> </h3>
+</div>

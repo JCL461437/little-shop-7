@@ -45,5 +45,19 @@ RSpec.describe "Admin Invoices Show Page" do
                 expect(page).to have_content(invoice_item_2.status)
             end
         end
+        scenario "I see the total revenue that will be generated from this invoice" do
+            customer = create(:customer)
+            invoice = create(:invoice, customer: customer)
+            item_1 = create(:item, unit_price: 10000)
+            item_2 = create(:item, unit_price: 2000)
+            create(:invoice_item, invoice: invoice, item: item_1, quantity: 2, unit_price: 10000)
+            create(:invoice_item, invoice: invoice, item: item_2, quantity: 5, unit_price: 2000)
+
+            visit admin_invoice_path(invoice)
+
+            within("#invoice_total_revenue") do
+                expect(page).to have_content("Total Revenue: $300.00")
+            end
+        end
     end
 end
