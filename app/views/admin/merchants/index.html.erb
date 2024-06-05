@@ -1,7 +1,29 @@
 <h1> Admin: Merchants </h1>
 
-<ol>
-  <% @merchants.each do |merchant| %></li>
-    <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
-  <% end %>
-</ol>
+<h2> <%= link_to 'New Merchant', new_admin_merchant_path %> 
+
+<div id="enabled_merchants">
+  <h2> Enabled Merchants </h2>
+  <ol>
+    <% @enabled_merchants.each do |merchant| %>
+      <li id="enabled_merchant_<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+        <%= button_to 'Disable', admin_merchant_path(merchant, status: :disabled), method: :patch, class: 'btn btn-warning' %>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
+<div id="disabled_merchants">
+  <h2> Disabled Merchants </h2>
+  <ol>
+    <% @disabled_merchants.each do |merchant| %>
+      <li id="disabled_merchant_<%= merchant.id %>">
+        <%= link_to "#{merchant.name}", admin_merchant_path(merchant) %>
+        <%= button_to 'Enable', admin_merchant_path(merchant, status: :enabled), method: :patch, class: 'btn btn-success' %>
+      </li>
+    <% end %>
+  </ol>
+</div>
+
+
