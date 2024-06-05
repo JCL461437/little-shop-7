@@ -31,4 +31,9 @@ class Merchant < ApplicationRecord
   def self.disabled_merchants
     Merchant.where(status: [:disabled])
   end
+
+  def top_five_merchants
+    binding.pry
+    Merchant.joins(invoices: :transactions)
+  end
 end
