@@ -21,7 +21,6 @@ RSpec.describe "Merchant Index Page" do
   describe "As a Merchant" do
     describe "When I visit the items index page and click the link to create a new item" do
       it "I can fill out a form and add a new item to my list of items" do 
-      
         visit "/merchants/#{@merchant.id}/items"
 
         click_on "New Item"
@@ -34,6 +33,7 @@ RSpec.describe "Merchant Index Page" do
         click_button "Save"
 
         expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+        expect(page).to have_content("Leather Jacket")
       end
     end
   end
