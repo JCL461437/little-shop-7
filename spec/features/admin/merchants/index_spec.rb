@@ -31,12 +31,6 @@ RSpec.describe "admin merchants index" do
     end
 
     describe "I see a button to disable or enable that merchant" do
-      # As an admin,
-      # When I visit the admin merchants index (/admin/merchants)
-      # Then next to each merchant name I see a button to disable or enable that merchant.
-      # When I click this button
-      # Then I am redirected back to the admin merchants index
-      # And I see that the merchant's status has changed
       it "Displays a button that can change a merchant's status" do
         merchant_1 = Merchant.create!(name: "Mans Machines", status: 1, id: 500)
         merchant_2 = Merchant.create!(name: "Guys Gizzmos", status: 1, id: 501)

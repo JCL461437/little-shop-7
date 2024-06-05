@@ -10,8 +10,6 @@ Rails.application.routes.draw do
     resources :merchants, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoices, only: [:index, :show]
   end
-
-  # patch "/admin/merchants/:id", to: "admin/merchants#update"
   
   resources :merchants, only: [:show] do
     resources :dashboard, only: [:index]
