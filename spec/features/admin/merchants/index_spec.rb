@@ -88,7 +88,7 @@ RSpec.describe "admin merchants index" do
         expect(current_path).to eq(new_admin_merchant_path)
 
         expect(response).to render_template(:new)
-        expect(flash.now[:notice]).to eq('Please fill out all the required fields.')
+        expect(flash[:alert]).to eq('Please fill out all the required fields.')
         
         fill_in "Name", with: "Craig Jones"
         click_button "Submit"
