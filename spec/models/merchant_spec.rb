@@ -13,17 +13,6 @@ RSpec.describe Merchant, type: :model do
 
     describe "#items_ready_to_ship" do
       it "returns items that are ready to ship from oldest to newest" do
-        # item_1 = create(:item, merchant: merchant)
-        # item_2 = create(:item, merchant: merchant)
-        # item_3 = create(:item, merchant: merchant)
-
-        # invoice = create(:invoice, customer: customer, items: [item_1, item_2, item_3])
-
-        # invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice, status: 2)
-        # invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice, status: 2)
-        # invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice, status: 0)
-
-        # transaction = create(:transaction, invoice: invoice, result: 0)
         item_1 = create(:item, merchant: merchant)
         item_2 = create(:item, merchant: merchant)
         item_3 = create(:item, merchant: merchant)

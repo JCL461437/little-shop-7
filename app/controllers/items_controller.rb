@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = @merchant.items.enabled_items 
     @disabled_items = @merchant.items.disabled_items
+    # binding.pry
   end
 
   def new
@@ -10,11 +11,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
+    @merchant = Merchant.find(params[:merchant_id])
+    item = Item.new(name: params[:name], description: params[:description], unit_price: params[:unit_price], merchant_id: params[:merchant_id])
     if item.save
-      redirect_to "/merchants/#{item_params[:merchant_id]}/items"
+      redirect_to "/merchants/#{@merchant.id}/items"
     else
-      redirect_to "/merchant/#{item_params[:merchant_id]}/items/new"
+      redirect_to "/merchant/#{@merchant.id}/items/new"
       flash[:alert] = "Error"
     end
   end

@@ -1,15 +1,15 @@
 <h1>Invoices for <%= @merchant.name %></h1>
 <table>
-    <thead>
-        <tr>
-            <th>Invoice ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @invoices.each do |invoice| %>
-            <tr>
-                <td><%= link_to invoice.id, merchant_invoice_path(@merchant, invoice) %></td>
-            </tr>
-        <% end %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Invoice ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to invoice.id, merchant_invoice_path(@merchant, invoice) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
