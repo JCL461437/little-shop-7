@@ -13,6 +13,16 @@
 - Lance Nelson, https://github.com/LancePants97
 - Garrett Bowman, https://github.com/GBowman1
 
+## Heroku App
+https://fathomless-sea-25232-ffc29695f369.herokuapp.com/
+
+## Ideas for a potential contributor to work on/refactor next
+- Update admin/merchants Top Merchants. Date is printing current date/time.
+- Welcome Page, create a form to enter a Merchant id to a merchant show page.
+- Match more views to wireframes using CSS.
+- Create more sad path/edge case tests.
+- Create destroy actions where appropriate.
+
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
 - Utilize advanced routing techniques including namespacing to organize and group like functionality together.
